@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Emulator Web App</title>
+    <style>
+        body {
+            background-color: #f0f4f7; /* Светло-голубой фон */
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        h1 {
+            color: #5a7d7c; /* Темно-пастельный зеленый */
+            margin-left: 2%;
+        }
+
+        .main-container, .menu-container {
+            padding: 2%;
+            margin: 2%;
+            background-color: #ffffff; /* Белый фон */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
+            border-radius: 8px; /* Скругленные углы */
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: center; /* Выравнивание кнопок по центру */
+            padding-bottom: 10px; /* Отступ снизу */
+        }
+
+        .menu-button {
+            flex-grow: 1; /* Кнопки занимают все доступное пространство */
+            background-color: #88a0a8; /* Пастельный сине-серый */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 10px; /* Отступы между кнопками */
+        }
+
+        .active-button {
+            flex-grow: 1; /* Кнопки занимают все доступное пространство */
+            background-color: #5a7d7c; /* Пастельный сине-серый */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0 10px; /* Отступы между кнопками */
+        }
+
+        .menu-button:hover {
+            background-color: #5a7d7c; /* Темно-пастельный зеленый при наведении */
+        }
+
+        .input-output-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px; /* Расстояние между контейнерами */
+        }
+
+        .form-container, .results-container, .errors-container {
+            width: 48.75%; /* Примерно половина ширины */
+            border: 1px solid #d3d3d3; /* Светлый серый бордюр */
+            background-color: #fafafa; /* Очень светлый серый фон */
+            border-radius: 4px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            border: none;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #5a7d7c; /* Пастельный зеленый для текста */
+            background-color: #eef5f5; /* Светло-пастельный голубой для textarea */
+        }
+
+        input[type="submit"] {
+            background-color: #88a0a8; /* Пастельный сине-серый */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #5a7d7c; /* Темно-пастельный зеленый при наведении */
+        }
+
+        .errors-container textarea {
+            height: 100px; /* Достаточная высота для отображения ошибок */
+        }
+        .results-container textarea {
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+<body>
+    <h1>Emulator Web App</h1>
+    <div class="menu-container">
+        <a href="https://ochre4.pythonanywhere.com/"> <button class="menu-button"  disabled>Эмулятор</button> </a>
+        <a href="https://ochre4.github.io/tasm/instructions.html"> <button class="menu-button" >Инструкция</button> </a>
+        <a href="https://ochre4.github.io/tasm/commands.html"> <button class="menu-button" >Команды</button> </a>
+        <a href="https://ochre4.github.io/tasm/contacts.html"> <button class="active-button" disabled>Контакты</button> </a>
+    </div>
+    <div class="main-container">
+        <p>В разработке</p>
+    </div>
+</body>
+</html>
