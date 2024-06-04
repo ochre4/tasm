@@ -2,10 +2,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>E-TASM</title>
     <link rel="icon" href="micro_icon.png" type="image/x-icon">
     <link rel="shortcut icon" href="micro_icon.png" type="image/x-icon">
-<style>
+    <title>E-TASM</title>
+    <style>
         body {
             background-color: #f0f4f7; /* Светло-голубой фон */
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -17,9 +17,42 @@
             margin-left: 2%;
         }
 
-        .main-container {
+        .sidebar {
+            width: 20%;
             padding: 2%;
             margin: 2%;
+            background-color: #ffffff; /* Белый фон */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
+            border-radius: 8px; /* Скругленные углы */
+            position: fixed; /* Фиксированное положение */
+            top: 25%; /* Отступ сверху */
+            bottom: 0;
+        }
+
+        .sidebar h2 {
+            color: #5a7d7c;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin: 10px 0;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+
+        }
+
+        .main-content {
+            width: 75%;
+            margin-left: 29%;
+            margin-right: 2%;
+            padding: 2%;
             background-color: #ffffff; /* Белый фон */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
             border-radius: 8px; /* Скругленные углы */
@@ -50,19 +83,9 @@
             margin: 0; /* Уменьшенные отступы между кнопками */
             font-size: 16px; /* Увеличенный размер шрифта */
         }
-
-        .menu-button:disabled {
-            background-color: gray;
-            cursor: not-allowed;
-        }
-
-        .active-button {
-            background-color: #5a7d7c; /* Темно-пастельный зеленый */
-        }
-
-        .menu-button:hover, 
-        .active-button:hover {
-            background-color: #5a7d7c; /* Темно-пастельный зеленый при наведении */
+        
+        .menu-button:hover {
+            background-color: #5a7d7c;
         }
         td {
             padding: 1%;
@@ -70,17 +93,36 @@
         .td {
             width: 10%;
         }
+        .navigator {
+            color: #4d4d4d;
+            transition: color 0.3s;
+        }
+        .navigator:hover {
+            color: #999;
+        }
     </style>
 </head>
 <body>
-    <h1>E-TASM — Эмулятор Турбо Ассемблера</h1>
-    <div class="menu-container">
-        <a href="https://ochre4.pythonanywhere.com/"> <button class="menu-button">Эмулятор</button> </a>
-        <a href="https://ochre4.github.io/tasm/instructions.html"> <button class="menu-button" >Инструкция</button> </a>
-        <a href="https://ochre4.github.io/tasm/commands.html"> <button class="active-button" disabled>Команды</button> </a>
-        <a href="https://ochre4.github.io/tasm/contacts.html"> <button class="menu-button" >Контакты</button> </a>
+    <h1 id="start">E-TASM — Эмулятор Турбо Ассемблера</h1>
+    <div id="menu" class="menu-container">
+        <a href="https://ochre4.pythonanywhere.com/"><button class="menu-button" disabled>Эмулятор</button></a>
+        <a href="https://ochre4.github.io/tasm/instructions.html"><button class="menu-button">Инструкция</button></a>
+        <a href="https://ochre4.github.io/tasm/commands.html"><button class="active-button" disabled>Команды</button></a>
+        <a href="https://ochre4.github.io/tasm/contacts.html"><button class="menu-button">Контакты</button></a>
     </div>
-        <div class="main-container">
+    <div class="content-container" style="display: flex;">
+        <div class="sidebar">
+            <h2>Навигация</h2>
+            <ul>
+                <li><a class="navigator" onclick="scrollToTop()">Меню</a></li>
+                <li><a class="navigator" href="#basic-commands">Основные команды</a></li>
+                <li><a class="navigator" href="#if">Знаковые условные переходы</a></li>
+                <li><a class="navigator" href="#aif">Беззнаковые условные переходы</a></li>
+                <li><a class="navigator" href="#loops">Циклы</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
             <table border="1" style="width:100%;">
                 <tr>
                     <th>Команда</th>
@@ -89,54 +131,53 @@
                     <th>ЗНАЧЕНИЕ_1</th>
                     <th>ЗНАЧЕНИЕ_2</th>
                 </tr>
-                <tr>
+                <tr id="basic-commands">
                     <td><b>mov</b></td>
                     <td><b>mov al,bl</b> ; перемещает значение из регистра <i>bl</i> в регистр <i>al</i></td>
-                    <td>mov ЧИСЛО_1, ЧИСЛО_2</td>
-                    <td> - Регистр;<br> - Переменная;</td>
-                    <td class="td"> - Регистр;<br> - Переменная;<br> - Число;</td>
+                    <td>mov ОПЕРАНД_1, ОПЕРАНД_2</td>
+                    <td> Регистр;<br> Переменная;</td>
+                    <td class="td"> Регистр;<br> Переменная;<br> Число;</td>
                 </tr>
                 <tr>
                     <td><b>add</b></td>
                     <td><b>add al,bl</b> ; складывает значения из регистров <i>al</i> и <i>bl</i> и результат сложения сохраняет в регистр <i>al</i></td>
-                    <td>add ЧИСЛО_1, ЧИСЛО_2</td>
-                    <td> - Регистр;</td>
-                    <td class="td"> - Регистр;<br> - Переменная;<br> - Число;</td>
+                    <td>add ОПЕРАНД_1, ОПЕРАНД_2</td>
+                    <td> Регистр;</td>
+                    <td class="td"> Регистр;<br> Переменная;<br> Число;</td>
                 </tr>
                 <tr>
                     <td><b>sub</b></td>
                     <td><b>sub al,bl</b> ; вычитает значение регистра <i>bl</i> из значения регистра <i>al</i> и результат сложения сохраняет в регистр <i>al</i></td>
-                    <td>sub ЧИСЛО_1, ЧИСЛО_2</td>
-                    <td> - Регистр;</td>
-                    <td class="td"> - Регистр;<br> - Переменная;<br> - Число;</td>
+                    <td>sub ОПЕРАНД_1, ОПЕРАНД_2</td>
+                    <td> Регистр;</td>
+                    <td class="td"> Регистр;<br> Переменная;<br> Число;</td>
                 </tr>
                 <tr>
                     <td><b>inc</b></td>
                     <td><b>inc al</b>   ; увеличивает значение регистра <i>al</i> на <i>1</i></td>
-                    <td>inc ЧИСЛО_1</td>
-                    <td> - Регистр;</td>
+                    <td>inc ОПЕРАНД_1</td>
+                    <td> Регистр;</td>
                     <td> </td>
                 </tr>
                 <tr>
                     <td><b>dec</b></td>
                     <td><b>dec al</b> ; уменьшает значение регистра <i>al</i> на <i>1</i></td>
-                    <td>dec ЧИСЛО_1</td>
-                    <td> - Регистр;</td>
+                    <td>dec ОПЕРАНД_1</td>
+                    <td> Регистр;</td>
                     <td> </td>
                 </tr>
-
                 <tr>
                     <td><b>mul</b></td>
                     <td><b>mul bl</b> ; умножает значение регистра <i>al</i> на значение регистра <i>bl</i> и сохраняет результат в регистр <i>al</i></td>
                     <td>mul ОПЕРАНД_1</td>
-                    <td> - Регистр; <br> - Число;  <bt> - Переменная; </td>
+                    <td> Регистр; <br> Число;  <bt> Переменная; </td>
                     <td> </td>
                 </tr>
                 <tr>
                     <td><b>div</b></td>
                     <td><b>div bl</b> ; делит значение регистра <i>al</i> на значение регистра <i>bl</i> и сохраняет результат в регистр <i>al</i></td>
                     <td>div ОПЕРАНД_1</td>
-                    <td> - Регистр; <br> - Число;  <bt> - Переменная; </td>
+                    <td> Регистр; <br> Число;  <bt> Переменная; </td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -146,18 +187,17 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jmp МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
                     <td><b>cmp</b></td>
                     <td><b>cmp al,bl</b> ; сравнивает значения регистров <i>al</i> и <i>bl</i> между собой</td>
                     <td>cmp ОПЕРАНД_1, ОПЕРАНД_2</td>
-                    <td> - Регистр;</td>
-                    <td> - Регистр;<br> - Переменная;<br> - Число;</td>
+                    <td> Регистр;</td>
+                    <td> Регистр;<br> Переменная;<br> Число;</td>
                 </tr>
-
-                <tr>
+                <tr id="if">
                     <td><b>je</b></td>
                     <td><b>cmp al,bl</b> ; выполняется сравнение регистров <i>al</i> и <i>bl</i><br>
                         <b>je @МЕТКА_1</b> ; в любой части программы выполняет переход к выполнению тела метки с названием <i>МЕТКА_1</i> при условии: значение регистра <i>al</i> РАВНО значению регистра <i>bl</i><br>
@@ -166,7 +206,7 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>je МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -178,7 +218,7 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jne МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -190,7 +230,7 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jg МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -202,8 +242,9 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jge МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
+                </tr>
                 <tr>
                     <td><b>jl</b></td>
                     <td><b>cmp al,bl</b> ; выполняется сравнение регистров <i>al</i> и <i>bl</i><br>
@@ -213,7 +254,7 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jl МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -225,10 +266,10 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jle МЕТКА_1</td>
-                    <td> - Метка;</td>
-                    <td> </td> 
+                    <td> Метка</td>
+                    <td> </td>
                 </tr>
-                <tr>
+                <tr id="aif">
                     <td><b>ja</b></td>
                     <td><b>cmp al,bl</b> ; выполняется сравнение регистров <i>al</i> и <i>bl</i><br>
                         <b>ja @МЕТКА_1</b> ; в любой части программы выполняет переход к выполнению тела метки с названием <i>МЕТКА_1</i> при условии: беззнаковое значение регистра <i>al</i> БОЛЬШЕ беззнакового значения регистра <i>bl</i><br>
@@ -237,20 +278,21 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>ja МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
                     <td><b>jae</b></td>
                     <td><b>cmp al,bl</b> ; выполняется сравнение регистров <i>al</i> и <i>bl</i><br>
-                        <b>jae @МЕТКА_1</b> ; в любой части программы выполняет переход к выполнению тела метки с названием <i>МЕТКА_1</i> при условии: беззнаковое регистра <i>al</i> БОЛЬШЕ ИЛИ РАВНО беззнакового значения регистра <i>bl</i><br>
+                        <b>jae @МЕТКА_1</b> ; в любой части программы выполняет переход к выполнению тела метки с названием <i>МЕТКА_1</i> при условии: беззнаковое значение регистра <i>al</i> БОЛЬШЕ ИЛИ РАВНО беззнакового значения регистра <i>bl</i><br>
                         <b></b> ; если условие <i>jae</i> не выполняется, то выполняются команды после строки <i>jae @МЕТКА_1</i><br>
                         <b>@МЕТКА_1:</b> ; название метки <i>МЕТКА_1</i><br>
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jae МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
+                </tr>
                 <tr>
                     <td><b>jb</b></td>
                     <td><b>cmp al,bl</b> ; выполняется сравнение регистров <i>al</i> и <i>bl</i><br>
@@ -260,7 +302,7 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jb МЕТКА_1</td>
-                    <td> - Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
                 <tr>
@@ -272,20 +314,39 @@
                         <b>add al,bl</b> ; <i>начало тела метки</i>, к значению регистра <i>al</i> прибавляет значение регистра <i>bl</i><br>
                         <b>inc bl</b> ; увеличивает значение регистра <i>bl</i> на <i>1</i>, <i>конец тела метки</i></td>
                     <td>jbe МЕТКА_1</td>
-                    <td> - Метка;</td>
-                    <td> </td> 
+                    <td> Метка</td>
+                    <td> </td>
                 </tr>
-                <tr>
+                <tr id="loops">
                     <td><b>loop</b></td>
                     <td><b>@МЕТКА_1:</b> ; оглавление метки <i>@МЕТКА_1</i><br>
                         <b>add al,bl</b> ; начало тела метки <i>МЕТКА_1</i>, которое начинается со сложения значений из регистров <i>al</i> и <i>bl</i><br>
                         <b>loop МЕТКА_1</b> ; выполняет код от строки <i>@МЕТКА_1:</i> до <i>loop МЕТКА_1</i> количество раз, записанное в <i>cl</i><br>
                         <b>mul 2</b> ; как только <i>cl</i> достигает значения <i>0</i>, программа переходит к коду ПОСЛЕ строки <i>loop @МЕТКА_1</i>. Конец тела метки <i>МЕТКА_1</i>.</td>
                     <td>loop МЕТКА_1</td>
-                    <td>- Метка</td>
+                    <td> Метка</td>
                     <td> </td>
                 </tr>
             </table>
         </div>
+    </div>
+    <script>
+        // Скрипт для плавного скроллинга к нужному разделу при клике на пункт навигации
+        document.querySelectorAll('.sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
