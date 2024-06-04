@@ -87,6 +87,10 @@
             margin: 0; /* Уменьшенные отступы между кнопками */
             font-size: 16px; /* Увеличенный размер шрифта */
         }
+
+        .active-button {
+            background-color: #5a7d7c;
+        }
         
         .menu-button:hover {
             background-color: #5a7d7c;
@@ -109,9 +113,9 @@
 <body>
     <h1 id="start">E-TASM — Эмулятор Турбо Ассемблера</h1>
     <div id="menu" class="menu-container">
-        <a href="https://ochre4.pythonanywhere.com/"><button class="menu-button" disabled>Эмулятор</button></a>
-        <a href="https://ochre4.github.io/tasm/instructions.html"><button class="menu-button">Инструкция</button></a>
-        <a href="https://ochre4.github.io/tasm/commands.html"><button class="active-button" disabled>Команды</button></a>
+        <a href="https://ochre4.pythonanywhere.com/"><button class="menu-button">Эмулятор</button></a>
+        <a href="https://ochre4.github.io/tasm/instructions.html"><button class="active-button" disabled>Инструкция</button></a>
+        <a href="https://ochre4.github.io/tasm/commands.html"><button class="menu-button">Команды</button></a>
         <a href="https://ochre4.github.io/tasm/contacts.html"><button class="menu-button">Контакты</button></a>
     </div>
     <div class="content-container" style="display: flex;">
