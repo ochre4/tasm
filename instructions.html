@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Emulator Web App</title>
+    <link rel="icon" href="micro_icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="micro_icon.png" type="image/x-icon">
+    <title>E-TASM</title>
     <style>
         body {
             background-color: #f0f4f7; /* Светло-голубой фон */
@@ -15,105 +17,147 @@
             margin-left: 2%;
         }
 
-        .main-container, .menu-container {
+        .sidebar {
+            width: 20%;
             padding: 2%;
             margin: 2%;
+            background-color: #ffffff; /* Белый фон */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
+            border-radius: 8px; /* Скругленные углы */
+            position: fixed; /* Фиксированное положение */
+            top: 25%; /* Отступ сверху */
+            bottom: 0;
+        }
+
+        .sidebar h2 {
+            color: #5a7d7c;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar li {
+            margin: 10px 0;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar a:hover {
+            cursor: pointer;
+        }
+
+        .main-content {
+            width: 75%;
+            margin-left: 29%;
+            margin-right: 2%;
+            margin-bottom: 2%;
+            padding: 2%;
             background-color: #ffffff; /* Белый фон */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
             border-radius: 8px; /* Скругленные углы */
         }
 
         .menu-container {
+            padding: 2%;
+            margin: 2%;
+            background-color: #ffffff; /* Белый фон */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
+            border-radius: 8px; /* Скругленные углы */
             display: flex;
-            justify-content: center; /* Выравнивание кнопок по центру */
-            padding-bottom: 10px; /* Отступ снизу */
+            justify-content: space-around; /* Сокращенное расстояние между кнопками */
+            padding-bottom: 1.5%; /* Отступ снизу */
+            padding-top: 1.5%;
         }
 
-        .menu-button {
-            flex-grow: 1; /* Кнопки занимают все доступное пространство */
-            background-color: #88a0a8; /* Пастельный сине-серый */
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 0 10px; /* Отступы между кнопками */
-        }
-
+        .menu-button, 
         .active-button {
             flex-grow: 1; /* Кнопки занимают все доступное пространство */
-            background-color: #5a7d7c; /* Пастельный сине-серый */
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin: 0 10px; /* Отступы между кнопками */
-        }
-
-        .menu-button:hover {
-            background-color: #5a7d7c; /* Темно-пастельный зеленый при наведении */
-        }
-
-        .input-output-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px; /* Расстояние между контейнерами */
-        }
-
-        .form-container, .results-container, .errors-container {
-            width: 48.75%; /* Примерно половина ширины */
-            border: 1px solid #d3d3d3; /* Светлый серый бордюр */
-            background-color: #fafafa; /* Очень светлый серый фон */
-            border-radius: 4px;
-        }
-
-        textarea {
-            width: 100%;
-            height: 300px;
-            border: none;
-            padding: 10px;
-            box-sizing: border-box;
-            font-size: 16px;
-            color: #5a7d7c; /* Пастельный зеленый для текста */
-            background-color: #eef5f5; /* Светло-пастельный голубой для textarea */
-        }
-
-        input[type="submit"] {
             background-color: #88a0a8; /* Пастельный сине-серый */
             color: white;
-            padding: 10px 20px;
+            padding: 15px 60px; /* Увеличенный padding для кнопок */
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
             transition: background-color 0.3s;
+            margin: 0; /* Уменьшенные отступы между кнопками */
+            font-size: 16px; /* Увеличенный размер шрифта */
         }
-
-        input[type="submit"]:hover {
-            background-color: #5a7d7c; /* Темно-пастельный зеленый при наведении */
+        
+        .menu-button:hover {
+            background-color: #5a7d7c;
         }
-
-        .errors-container textarea {
-            height: 100px; /* Достаточная высота для отображения ошибок */
+        td {
+            padding: 1%;
         }
-        .results-container textarea {
-            overflow-y: hidden;
+        .td {
+            width: 10%;
+        }
+        .navigator {
+            color: #4d4d4d;
+            transition: color 0.3s;
+        }
+        .navigator:hover {
+            color: #999;
         }
     </style>
 </head>
 <body>
-    <h1>Emulator Web App</h1>
-    <div class="menu-container">
-        <a href="https://ochre4.pythonanywhere.com/"><button class="menu-button" >Эмулятор</button></a>
-        <a href="https://ochre4.github.io/tasm/instructions.html"><button class="active-button" disabled>Инструкция</button></a>
-        <a href="https://ochre4.github.io/tasm/commands.html"><button class="menu-button">Команды</button></a>
+    <h1 id="start">E-TASM — Эмулятор Турбо Ассемблера</h1>
+    <div id="menu" class="menu-container">
+        <a href="https://ochre4.pythonanywhere.com/"><button class="menu-button" disabled>Эмулятор</button></a>
+        <a href="https://ochre4.github.io/tasm/instructions.html"><button class="menu-button">Инструкция</button></a>
+        <a href="https://ochre4.github.io/tasm/commands.html"><button class="active-button" disabled>Команды</button></a>
         <a href="https://ochre4.github.io/tasm/contacts.html"><button class="menu-button">Контакты</button></a>
     </div>
-    <div class="main-container">
-        <p>В разработке</p>
+    <div class="content-container" style="display: flex;">
+        <div class="sidebar">
+            <h2>Навигация</h2>
+            <ul>
+                <li><a class="navigator" onclick="scrollToTop()">Меню</a></li>
+                <li><a class="navigator" href="#emulator">Описание страницы "Эмулятор"</a></li>
+                <li><a class="navigator" href="#comands">Описание страницы "Команды"</a></li>
+                <li><a class="navigator" href="#contacts">Описание страницы "Контакты"</a></li>
+                <li><a class="navigator" href="#dinfo">Дополнительная информация</a></li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <p>Инструкция "Добро пожаловать"</p>
+        </div>
     </div>
+    <div id="emulator" class="main-content">
+        <p>Инструкция "Эмулятор"</p>
+    </div>
+    <div id="comands" class="main-content">
+        <p>Инструкция "Команды"</p>
+    </div>
+    <div id="contacts" class="main-content">
+        <p>Инструкция "Контакты"</p>
+    </div>
+    <div id="dinfo" class="main-content">
+        <p>Инструкция "Дополнительная информация"</p>
+    </div>
+    <script>
+        // Скрипт для плавного скроллинга к нужному разделу при клике на пункт навигации
+        document.querySelectorAll('.sidebar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 </body>
 </html>
