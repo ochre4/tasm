@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <link rel="icon" href="micro_icon.png" type="image/x-icon">
     <link rel="shortcut icon" href="micro_icon.png" type="image/x-icon">
-    <title>E-TASM</title>
-<style>
+    <title>E-TASM — Контакты</title>
+    <style>
         body {
             background-color: #f0f4f7; /* Светло-голубой фон */
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -23,6 +23,9 @@
             background-color: #ffffff; /* Белый фон */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Небольшая тень для эффекта глубины */
             border-radius: 8px; /* Скругленные углы */
+            display: flex;
+            justify-content: space-around; /* Размещаем divы по горизонтали */
+            align-items: center; /* Выравниваем по вертикали */
         }
 
         .menu-container {
@@ -64,18 +67,69 @@
         .active-button:hover {
             background-color: #5a7d7c; /* Темно-пастельный зеленый при наведении */
         }
+
+        .contacts-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .contact-info, 
+        .qr-code {
+            flex: 1;
+            margin: 10px;
+        }
+
+        .qr-code {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .qr-code img {
+            max-width: 100%; /* Ограничиваем размер изображения, чтобы оно не выходило за пределы контейнера */
+            margin: 10px 0; /* Добавляем отступы между изображениями */
+        }
+
+        .qr-code p {
+            margin: 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <h1>E-TASM — Эмулятор Турбо Ассемблера</h1>
+    <h1>E-TASM — Контакты</h1>
     <div class="menu-container">
         <a href="https://ochre4.pythonanywhere.com/"> <button class="menu-button" >Эмулятор</button> </a>
         <a href="https://ochre4.github.io/tasm/instructions.html"> <button class="menu-button" >Инструкция</button> </a>
         <a href="https://ochre4.github.io/tasm/commands.html"> <button class="menu-button" >Команды</button> </a>
-        <a href="https://ochre4.github.io/tasm/contacts.html"> <button class="active-button" disabled>Контакты</button> </a>
+        <a href="https://ochre4.github.io/tasm/contacts.html"> <button class="menu-button" disabled>Контакты</button> </a>
     </div>
-    <div class="main-container">
-        <p>В разработке</p>
+    <div class="main-container contacts-container">
+        <div class="contact-info">
+            <h2>Контактная информация</h2>
+            <p style="text-align: justify;">Если вы обнаружили ошибку или у вас есть предложения по улучшению нашего эмулятора, пожалуйста, свяжитесь с нами, используя предоставленные ниже контактные данные. Для удобства справа представлен ряд QR-кодов, которые автоматически создают шаблоны для фиксирования возникшей ошибки (см. рисунок 1) и для предоставления рекомендаций при дальнейшей разработки сайта (см. рисунок 2). Для связи с разработчиком возможно обратиться по следующим контактным данным:</p>
+            <p>Email: ochre4@mail.ru</p>
+            <p>Телефон: +7 (920) 502-9031</p>
+        </div>
+        <div class="qr-code">
+            <div class="qr-item">
+                <img src="errors.png" alt="QR Code">
+                <p>Рисунок 1 - Шаблон письма "Возникла ошибка"</p>
+            </div>
+            <div class="qr-item">
+                <img src="recommendations.png" alt="QR Code">
+                <p>Рисунок 2 - Шаблон письма "Рекомендации"</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
